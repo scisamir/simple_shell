@@ -37,10 +37,13 @@ int main(void)
 	char *lptr = NULL, **words = NULL;
 	size_t n = 0;
 	ssize_t check = 0;
+	int mode;
 
 	while (check != -1)
 	{
-		write(STDOUT_FILENO, prompt, _strlen(prompt));
+		mode = isatty(STDIN_FILENO);
+		if (mode)
+			write(STDOUT_FILENO, prompt, _strlen(prompt));
 		check = getline(&lptr, &n, stdin);
 
 		if (check == -1)
@@ -49,10 +52,8 @@ int main(void)
 				free(lptr);
 			handle_exit(words);
 		}
-
 		if (lptr && _strcmp(lptr, newline))
 			words = parse_input(lptr);
-
 		if (words)
 		{
 			if (!(_strcmp(words[0], "exit")))
@@ -62,7 +63,6 @@ int main(void)
 
 		free(lptr);
 		free_words(words);
-
 		fflush(stdin);
 		lptr = NULL, words = NULL;
 		n = 0, check = 0;
