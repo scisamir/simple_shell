@@ -1,10 +1,11 @@
-#Simple shell
-###0x16. C - Simple Shell
+# Simple shell
+
+### 0x16. C - Simple Shell
 
 A Simple shell project to imitate the implementation of a Unix/Linux shell like Bash.
 It provide a basic command-line interface for users to interact with the operating system. Users can navigate through files, execute commands and manage process.
 
-##Feautures
+## Feautures
 
 * **Environment Navigation:** users can view, set and navigate through the environment.
 
