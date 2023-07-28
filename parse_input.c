@@ -24,7 +24,7 @@ char **parse_input(char *str)
 			word = strtok(NULL, delim);
 		}
 
-		words = malloc(sizeof(char *) * words_len);
+		words = malloc(sizeof(char *) * (words_len + 1));
 		if (words == NULL)
 		{
 			free(str_copy);

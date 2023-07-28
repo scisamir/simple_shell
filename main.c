@@ -15,12 +15,10 @@ void free_words(char **words)
 	{
 		while (words[i])
 		{
-			if (words[i])
-				free(words[i]);
+			free(words[i]);
 			i++;
 		}
-		if (words)
-			free(words);
+		free(words);
 	}
 }
 

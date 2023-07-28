@@ -32,6 +32,7 @@ char *find_exec(char *arg)
 				return (NULL);
 			}
 			_strcpy(dir_pos, dir);
+			dir_pos[(_strlen(dir_pos) + 1)] = '\0';
 			_strcat(dir_pos, "/");
 			_strcat(dir_pos, arg);
 			_strcat(dir_pos, "\0");
