@@ -85,28 +85,20 @@ char *_strcpy(char *dest, char *src)
 
 char *_strcat(char *dest, char *src)
 {
-	int i = 0, j = 0, k = 0, dest_len, src_len, new_len;
+	int i = 0, dest_len, src_len;
 
-	while (dest[i] != '\0')
-		i++;
+	dest_len = _strlen(dest);
+	src_len = _strlen(src);
 
+	dest += dest_len;
 
-	while (src[j] != '\0')
-		j++;
-
-	dest_len = i;
-	src_len = j;
-	new_len = dest_len + src_len - 1;
-
-	while (k <= new_len)
+	while (i < src_len)
 	{
-		if (k >= dest_len)
-			dest[k] = src[k - dest_len];
-		else
-			dest[k] = dest[k];
-
-		k++;
+		*dest++ = src[i];
+		i++;
 	}
+
+	*dest = '\0';
 
 	return (dest);
 }
