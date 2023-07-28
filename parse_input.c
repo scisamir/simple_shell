@@ -16,12 +16,16 @@ char **parse_input(char *str)
 	if (str)
 		{
 		str_copy = _strdup(str);
-
 		word = strtok(str, delim);
 		while (word)
 		{
 			words_len++;
 			word = strtok(NULL, delim);
+		}
+		if (words_len == 0)
+		{
+			free(str_copy);
+			return(NULL);
 		}
 
 		words = malloc(sizeof(char *) * (words_len + 1));
@@ -30,7 +34,6 @@ char **parse_input(char *str)
 			free(str_copy);
 			return (NULL);
 		}
-
 		word = strtok(str_copy, delim);
 		while (word)
 		{
@@ -39,11 +42,8 @@ char **parse_input(char *str)
 			i++;
 		}
 		words[i] = NULL;
-
 		free(str_copy);
-
 		return (words);
 	}
-
 	return (NULL);
 }

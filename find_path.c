@@ -24,7 +24,6 @@ char *find_exec(char *arg)
 		while (dir)
 		{
 			dir_len = _strlen(dir);
-
 			dir_pos = malloc(sizeof(char) * (cmd_len + dir_len + 2));
 			if (dir_pos == NULL)
 			{
