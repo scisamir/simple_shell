@@ -25,7 +25,7 @@ char **parse_input(char *str)
 		if (words_len == 0)
 		{
 			free(str_copy);
-			return(NULL);
+			return (NULL);
 		}
 
 		words = malloc(sizeof(char *) * (words_len + 1));
