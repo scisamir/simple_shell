@@ -11,10 +11,23 @@
 
 int handle_exit(char **args)
 {
-	free_words(args);
+	int status;
+
+	if (args)
+	{
+		if (!args[1])
+		{
+			free_words(args);
+			exit(EXIT_SUCCESS);
+		}
+
+		status = atoi(args[1]);
+		exit(status);
+	}
 
 	exit(EXIT_SUCCESS);
 }
+
 
 /**
  * handle_cd - function that handles "cd"

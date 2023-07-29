@@ -101,7 +101,7 @@ int main(void)
 				if (failed_exit && !words[1])
 				{
 					words = _realloc(words, sizeof(words), sizeof(char *) * 3);
-					words[1] = _strdup("2"); words[2] = NULL;
+					words[1] = _strdup("2"), words[2] = NULL;
 				}
 				free(lptr);
 			}
