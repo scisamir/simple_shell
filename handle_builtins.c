@@ -27,14 +27,42 @@ int handle_exit(char **args)
 
 int handle_cd(char **args)
 {
-	if (!args[1])
-		perror("Error");
+	char *dir_new = args[1];
+	char *dir_current;
 
-	else
+	if (!dir_new)
 	{
-		if (chdir(args[1]) == -1)
+		dir_new = getenv("HOME");
+		if (dir_new)
+		{
 			perror("Error");
+			return (EXIT_FAILURE);
+		}
 	}
+	else if (strcmp(dir_new, "-") == 0)
+	{
+		dir_new = getenv("OLDPWD");
+		if (!dir_new)
+		{
+			perror("Error");
+			return (EXIT_FAILURE);
+		}
+	}
+	dir_current = getcwd(NULL, 0);
+	if (!dir_current)
+	{
+		perror("Error");
+		return (EXIT_FAILURE);
+	}
+	setenv("OLDPWD", getenv("PWD"), 1);
+	free(dir_current);
+	if (chdir(dir_new) == -1)
+	{
+		perror("Error");
+		return (EXIT_FAILURE);
+	}
+	setenv("PWD", dir_current, 1);
+	free(dir_current);
 
 	return (EXIT_SUCCESS);
 }
