@@ -33,6 +33,7 @@ char *find_path(char *cmd);
 int handle_execs(char **args);
 int handle_exit(char **args);
 int handle_cd(char **args);
+int handle_env(__attribute__((unused)) char **args);
 void free_words(char **words);
 
 

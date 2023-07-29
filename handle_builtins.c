@@ -66,3 +66,27 @@ int handle_cd(char **args)
 
 	return (EXIT_SUCCESS);
 }
+
+
+/**
+ * handle_env - function that handles "env"
+ * builtin command
+ * @args: an array of strings containing the argument
+ * passed to the program
+ *
+ * Return: Exit Success
+ */
+
+int handle_env(__attribute__((unused)) char **args)
+{
+	int i = 0;
+
+	while (environ[i])
+	{
+		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+		write(STDOUT_FILENO, "\n", 1);
+		i++;
+	}
+
+	return (EXIT_SUCCESS);
+}

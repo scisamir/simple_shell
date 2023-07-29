@@ -13,6 +13,7 @@ int check_input(char **args)
 	unsigned int i;
 	builtin_t builtin_arr[] = {
 		{"cd", handle_cd},
+		{"env", handle_env},
 		{"exit", handle_exit},
 		{NULL, NULL},
 	};
