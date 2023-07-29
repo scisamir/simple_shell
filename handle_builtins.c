@@ -51,42 +51,29 @@ int handle_exit(char **args)
 
 int handle_cd(char **args)
 {
-	char *dir_new = args[1];
-	char *dir_current;
+	char cur_wd[PATH_MAX];
+	int err = 1;
 
-	if (!dir_new)
-	{
-		dir_new = getenv("HOME");
-		if (dir_new)
-		{
-			perror("Error");
-			return (EXIT_FAILURE);
-		}
-	}
-	else if (strcmp(dir_new, "-") == 0)
-	{
-		dir_new = getenv("OLDPWD");
-		if (!dir_new)
-		{
-			perror("Error");
-			return (EXIT_FAILURE);
-		}
-	}
-	dir_current = getcwd(NULL, 0);
-	if (!dir_current)
+	if (!args[1])
+		err = chdir(getenv("HOME"));
+
+	else if (!(_strcmp(args[1], "-")))
+		err = chdir(getenv("OLDPWD"));
+
+	else
+		err = chdir(args[1]);
+
+	if (err)
 	{
 		perror("Error");
 		return (EXIT_FAILURE);
 	}
-	setenv("OLDPWD", getenv("PWD"), 1);
-	free(dir_current);
-	if (chdir(dir_new) == -1)
+	else if (!err)
 	{
-		perror("Error");
-		return (EXIT_FAILURE);
+		getcwd(cur_wd, sizeof(cur_wd));
+		setenv("OLD_PWD", getenv("PWD"), 1);
+		setenv("PWD", cur_wd, 1);
 	}
-	setenv("PWD", dir_current, 1);
-	free(dir_current);
 
 	return (EXIT_SUCCESS);
 }
