@@ -25,7 +25,7 @@ int handle_execs(char **args)
 	{
 		if (execve(path, args, environ) == -1)
 			perror("Error");
-		exit(EXIT_SUCCESS);
+		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)
 		perror("Error");
@@ -34,7 +34,9 @@ int handle_execs(char **args)
 		wait(&status);
 		free(path);
 		path = NULL;
-	}
 
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
+	}
 	return (EXIT_SUCCESS);
 }
