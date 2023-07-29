@@ -1,5 +1,31 @@
 #include "shell.h"
 /**
+ * get_input_count - function that returns the number of tokens
+ * @str: strings to be tokenize
+ * @delim: a delimiter to be passed to strtok
+ *
+ * Return: the length of the tokens
+ */
+
+int get_input_count(char *str, char *delim)
+{
+	char *word;
+	int len = 0;
+
+	word = strtok(str, delim);
+	while (word)
+	{
+		if (word[0] == '#')
+			break;
+		len++;
+		word = strtok(NULL, delim);
+	}
+
+	return (len);
+}
+
+
+/**
  * parse_input - function that tokenize the iput
  * string
  * @str: strings to be tokenize
@@ -16,12 +42,7 @@ char **parse_input(char *str)
 	if (str)
 		{
 		str_copy = _strdup(str);
-		word = strtok(str, delim);
-		while (word)
-		{
-			words_len++;
-			word = strtok(NULL, delim);
-		}
+		words_len = get_input_count(str, delim);
 		if (words_len == 0)
 		{
 			free(str_copy);
@@ -37,6 +58,8 @@ char **parse_input(char *str)
 		word = strtok(str_copy, delim);
 		while (word)
 		{
+			if (word[0] == '#')
+				break;
 			words[i] = _strdup(word);
 			word = strtok(NULL, delim);
 			i++;
