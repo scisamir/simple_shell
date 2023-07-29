@@ -22,6 +22,12 @@ int handle_exit(char **args)
 		}
 
 		status = atoi(args[1]);
+		if (status <= 0)
+		{
+			perror("Error");
+			exit(2);
+		}
+
 		free_words(args);
 		exit(status);
 	}
