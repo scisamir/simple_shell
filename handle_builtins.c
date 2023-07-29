@@ -22,14 +22,18 @@ int handle_exit(char **args)
 		}
 
 		status = atoi(args[1]);
+
 		if (status <= 0)
 		{
 			perror("Error");
+			free_words(args);
 			exit(2);
 		}
-
-		free_words(args);
-		exit(status);
+		else
+		{
+			free_words(args);
+			exit(status);
+		}
 	}
 
 	exit(EXIT_SUCCESS);
